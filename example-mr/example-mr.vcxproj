@@ -55,26 +55,26 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
-    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
     <Import Project="..\..\ofxOpenVR\ofxOpenVR.props" />
+    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
-    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
     <Import Project="..\..\ofxOpenVR\ofxOpenVR.props" />
+    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
-    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
     <Import Project="..\..\ofxOpenVR\ofxOpenVR.props" />
+    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
-    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
     <Import Project="..\..\ofxOpenVR\ofxOpenVR.props" />
+    <Import Project="..\..\ofxZED\CUDA 9.1.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -108,7 +108,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZED_MR\libs;..\..\..\addons\ofxZED_MR\libs\ZED_MR;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZED_MR\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZEDMR\libs;..\..\..\addons\ofxZEDMR\libs\ZED_MR;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZEDMR\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
@@ -128,7 +128,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZED_MR\libs;..\..\..\addons\ofxZED_MR\libs\ZED_MR;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZED_MR\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZEDMR\libs;..\..\..\addons\ofxZEDMR\libs\ZED_MR;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZEDMR\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -138,7 +138,7 @@
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies);sl_core64.lib;sl_input64.lib;sl_zed64.lib;sl_mr_core64.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -148,7 +148,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZED_MR\libs;..\..\..\addons\ofxZED_MR\libs\ZED_MR;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZED_MR\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZEDMR\libs;..\..\..\addons\ofxZEDMR\libs\ZED_MR;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZEDMR\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -171,7 +171,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZED_MR\libs;..\..\..\addons\ofxZED_MR\libs\ZED_MR;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include;..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZED_MR\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxOpenVR\libs\OpenVR\controller_callouts;..\..\..\addons\ofxOpenVR\libs\OpenVR\headers;..\..\..\addons\ofxOpenVR\libs\OpenVR\src;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\json;..\..\..\addons\ofxOpenVR\libs\OpenVR\src\vrcommon;..\..\..\addons\ofxOpenVR\src;..\..\..\addons\ofxZED\libs;..\..\..\addons\ofxZED\libs\ZED;..\..\..\addons\ofxZED\libs\ZED\bin;..\..\..\addons\ofxZED\libs\ZED\bin\vs;..\..\..\addons\ofxZED\libs\ZED\bin\vs\x64;..\..\..\addons\ofxZED\libs\ZED\include;..\..\..\addons\ofxZED\libs\ZED\include\sl;..\..\..\addons\ofxZED\libs\ZED\include\sl_core;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\mapping;..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils;..\..\..\addons\ofxZED\libs\ZED\include\sl_zed;..\..\..\addons\ofxZED\libs\ZED\lib;..\..\..\addons\ofxZED\libs\ZED\lib\vs;..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED\src;..\..\..\addons\ofxZEDMR\libs;..\..\..\addons\ofxZEDMR\libs\ZED_MR;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\bin\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include;..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64;..\..\..\addons\ofxZEDMR\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
@@ -183,7 +183,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies);sl_core64.lib;sl_input64.lib;sl_zed64.lib;sl_mr_core64.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZED_MR\libs\ZED_MR\lib\vs\x64</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxZED\libs\ZED\lib\vs\x64;..\..\..\addons\ofxZEDMR\libs\ZED_MR\lib\vs\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -193,6 +193,7 @@
     <ClCompile Include="..\..\..\addons\ofxOpenVR\src\CGLRenderModel.cpp" />
     <ClCompile Include="..\..\..\addons\ofxOpenVR\src\ofxOpenVR.cpp" />
     <ClCompile Include="..\..\..\addons\ofxZED\src\ofxZED.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxZEDMR\src\ofxZEDMR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h" />
@@ -212,11 +213,12 @@
     <ClInclude Include="..\..\..\addons\ofxZED\libs\ZED\include\sl_core\utils\types.hpp" />
     <ClInclude Include="..\..\..\addons\ofxZED\libs\ZED\include\sl_zed\Camera.hpp" />
     <ClInclude Include="..\..\..\addons\ofxZED\libs\ZED\include\sl_zed\defines.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\AntiDrift.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\defines.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\EnvironmentalLighting.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\latency.hpp" />
-    <ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\Rendering.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\src\ofxZEDMR.h" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\AntiDrift.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\defines.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\EnvironmentalLighting.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\latency.hpp" />
+    <ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\Rendering.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

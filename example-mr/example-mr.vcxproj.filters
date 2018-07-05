@@ -22,6 +22,9 @@
 		<ClCompile Include="..\..\..\addons\ofxZED\src\ofxZED.cpp">
 			<Filter>addons\ofxZED\src</Filter>
 		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxZEDMR\src\ofxZEDMR.cpp">
+			<Filter>addons\ofxZEDMR\src</Filter>
+		</ClCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<Filter Include="src">
@@ -75,20 +78,23 @@
 		<Filter Include="addons\ofxZED\libs\ZED\include\sl_zed">
 			<UniqueIdentifier>{AA89F54A-AF2B-6022-E630-9A92}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxZED_MR">
-			<UniqueIdentifier>{10A7FA5B-40C5-C6D7-5829-6AAC}</UniqueIdentifier>
+		<Filter Include="addons\ofxZEDMR">
+			<UniqueIdentifier>{529802D4-A837-70EB-27DF-8C4A}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxZED_MR\libs">
-			<UniqueIdentifier>{1C10A465-4647-5489-3630-D561}</UniqueIdentifier>
+		<Filter Include="addons\ofxZEDMR\src">
+			<UniqueIdentifier>{4E7B1859-655D-2674-DE5F-5BCF}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxZED_MR\libs\ZED_MR">
-			<UniqueIdentifier>{B727373E-D939-1248-FC43-24B3}</UniqueIdentifier>
+		<Filter Include="addons\ofxZEDMR\libs">
+			<UniqueIdentifier>{12B35081-7748-D8EF-7C0D-0FE6}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxZED_MR\libs\ZED_MR\include">
-			<UniqueIdentifier>{91CD1FFD-3F43-8CE8-7B3F-E16B}</UniqueIdentifier>
+		<Filter Include="addons\ofxZEDMR\libs\ZED_MR">
+			<UniqueIdentifier>{F349FB9B-89B9-6123-11CB-E5DD}</UniqueIdentifier>
 		</Filter>
-		<Filter Include="addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core">
-			<UniqueIdentifier>{B83E6CCE-BF5B-AD19-B8E7-E8EE}</UniqueIdentifier>
+		<Filter Include="addons\ofxZEDMR\libs\ZED_MR\include">
+			<UniqueIdentifier>{1B84A091-0342-DE3F-6FCA-EC93}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core">
+			<UniqueIdentifier>{C0666FE9-0336-B8D2-32F1-C725}</UniqueIdentifier>
 		</Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -146,20 +152,23 @@
 		<ClInclude Include="..\..\..\addons\ofxZED\libs\ZED\include\sl_zed\defines.hpp">
 			<Filter>addons\ofxZED\libs\ZED\include\sl_zed</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\AntiDrift.hpp">
-			<Filter>addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core</Filter>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\src\ofxZEDMR.h">
+			<Filter>addons\ofxZEDMR\src</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\defines.hpp">
-			<Filter>addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core</Filter>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\AntiDrift.hpp">
+			<Filter>addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\EnvironmentalLighting.hpp">
-			<Filter>addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core</Filter>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\defines.hpp">
+			<Filter>addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\latency.hpp">
-			<Filter>addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core</Filter>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\EnvironmentalLighting.hpp">
+			<Filter>addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core</Filter>
 		</ClInclude>
-		<ClInclude Include="..\..\..\addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core\Rendering.hpp">
-			<Filter>addons\ofxZED_MR\libs\ZED_MR\include\sl_mr_core</Filter>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\latency.hpp">
+			<Filter>addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core\Rendering.hpp">
+			<Filter>addons\ofxZEDMR\libs\ZED_MR\include\sl_mr_core</Filter>
 		</ClInclude>
 	</ItemGroup>
 	<ItemGroup>

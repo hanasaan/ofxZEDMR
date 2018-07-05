@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxOpenVR.h"
 #include "ofxZED.h"
+#include "ofxZEDMR.h"
 
 class ofApp : public ofBaseApp{
 
@@ -26,25 +27,9 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+
 		ofxOpenVR openVR;
-		ofxZED zed;
-
-		ofQuaternion hmdPlaneRot;
-		ofVec3f hmdPlanePos;
-
-		ofVec2f renderPlaneSize;
-		float HMDFocal;
-		float EyeToZedDistance = 0.0f;
-		ofVec2f OffCenterProjectionOffset;
-		float PlaneDistance = 10.0; // from ZEDMixedRealityPlugin.cs
-		ofVec3f plane_offset = ofVec3f(0, 0, -PlaneDistance);
-		sl::timeStamp image_ts;
-
-		ofShader bgra_shader;
-		bool zed_tracking_enable = false; // ToDo
-
-		ofMatrix4x4 quad_left;
-		ofMatrix4x4 quad_right;
+		ofxZED::Camera zed;
+		ofxZED::MR mr;
 
 };
