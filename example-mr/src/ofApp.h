@@ -14,6 +14,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 
+		void renderMR(ofxZED::VREye eye);
 		void render(vr::Hmd_Eye nEye);
 
 		void keyPressed(int key);
@@ -32,4 +33,5 @@ class ofApp : public ofBaseApp{
 		ofxZED::Camera zed;
 		ofxZED::MR mr;
 
+		ofEasyCam ecam;
 };
