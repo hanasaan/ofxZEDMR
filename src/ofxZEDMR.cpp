@@ -129,12 +129,15 @@ namespace ofxZED
 
 		loadHmdToZEDCalibration();
 		setupRenderPlane();
+
+		openvr->update();
 		initTrackingAR();
 	}
 
 	void MR::update()
 	{
 		updateHmdPose();
+		camera->update();
 		updateTracking();
 		lateUpdateHmdRendering();
 	}
@@ -214,7 +217,7 @@ namespace ofxZED
 	
 	void MR::loadHmdToZEDCalibration()
 	{
-		calib_transform.setTranslation(sl::Translation(-0.0315f, 0, -0.115f));
+		calib_transform.setTranslation(sl::Translation(-0.0315f, 0, -0.11f));
 		sl::mr::driftCorrectorSetCalibrationTransform(calib_transform);
 	}
 	
@@ -242,8 +245,6 @@ namespace ofxZED
 	
 	void MR::initTrackingAR()
 	{
-		openvr->update();
-
 		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
 
 		sl::Transform const_transform;
@@ -268,7 +269,7 @@ namespace ofxZED
 	{
 		// latency transform
 		sl::Transform latency_transform;
-		if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp, latency_transform)) {
+		if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp + latency_offset, latency_transform)) {
 			this->latency_pose = latency_transform;
 			b_latency_pose_ready = true;
 		}
@@ -296,11 +297,11 @@ namespace ofxZED
 		if (camera->bUseTracking) {
 			extractLatencyPose();
 			adjustTrackingAR();
-			zed_rig_root = zed_transform;
+			zed_rig_root = zed_transform * calib_transform;
 		}
 		else {
 			extractLatencyPose();
-			zed_rig_root = latency_pose;
+			zed_rig_root = latency_pose * calib_transform;
 		}
 	}
 

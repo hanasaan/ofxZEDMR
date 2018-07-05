@@ -79,10 +79,14 @@ namespace ofxZED
 
 		MRCamFbo& getCamLeft() { return cam_left; }
 		MRCamFbo& getCamRight() { return cam_right; }
+
+		void initTrackingAR();
+
+		void setLatencyOffset(int64_t v) { latency_offset = v; }
+		int64_t getLatencyOffset() const { return latency_offset;  }
 	protected:
 		void loadHmdToZEDCalibration();
 		void setupRenderPlane();
-		void initTrackingAR();
 
 		void updateHmdPose();
 		void extractLatencyPose();
@@ -117,6 +121,8 @@ namespace ofxZED
 		MRCamFbo cam_right;
 
 		std::function< void(VREye) > _callable_render_function;
+
+		int64_t latency_offset = -23333333;
 	};
 }
 
