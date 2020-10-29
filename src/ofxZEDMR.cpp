@@ -83,8 +83,8 @@ namespace ofxZED
 		// Only for vive... some image adjustment
 		if (hmdtype == HmdType_Vive) {
 			auto* zed = this->camera->getZedCamera();
-			zed->setCameraSettings(sl::CAMERA_SETTINGS::CAMERA_SETTINGS_CONTRAST, 3);
-			zed->setCameraSettings(sl::CAMERA_SETTINGS::CAMERA_SETTINGS_SATURATION, 3);
+			zed->setCameraSettings(sl::VIDEO_SETTINGS::CONTRAST, 3);
+			zed->setCameraSettings(sl::VIDEO_SETTINGS::SATURATION, 3);
 		}
 
 		string vert150 = "#version 150\n";
@@ -253,7 +253,7 @@ namespace ofxZED
 		sl::mr::driftCorrectorSetConstOffsetTransfrom(const_transform); // from Unity Implementation
 		//sl::mr::driftCorrectorSetConstOffsetTransfrom(hmd_transform * calib_transform); // from Unreal Implementation
 
-		camera->getZedCamera()->resetTracking(hmd_transform * calib_transform);
+		camera->getZedCamera()->resetPositionalTracking(hmd_transform * calib_transform);
 
 		zed_rig_root = hmd_transform;
 	}
@@ -261,7 +261,7 @@ namespace ofxZED
 	void MR::updateHmdPose()
 	{
 		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
-		sl::timeStamp ts = camera->getZedCamera()->getTimestamp(sl::TIME_REFERENCE::TIME_REFERENCE_CURRENT);
+		sl::Timestamp ts = camera->getZedCamera()->getTimestamp(sl::TIME_REFERENCE::CURRENT);
 		sl::mr::latencyCorrectorAddKeyPose(sl::mr::keyPose(hmd_transform, ts));
 	}
 	
@@ -269,7 +269,7 @@ namespace ofxZED
 	{
 		// latency transform
 		sl::Transform latency_transform;
-		if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp + latency_offset, latency_transform)) {
+		if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp + sl::Timestamp(latency_offset), latency_transform)) {
 			this->latency_pose = latency_transform;
 			b_latency_pose_ready = true;
 		}

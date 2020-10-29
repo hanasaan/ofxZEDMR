@@ -7,13 +7,14 @@ OF Addon for building mixed-reality experience using Stereolab's [ZED Mini](http
 - [ofxZED](https://github.com/hanasaan/ofxZED)
 
 ## Requirement
-  - openFrameworks 0.10.0 64bit
+  - openFrameworks 0.11.0 64bit
   - Visual Studio 2017
-  - CUDA 9.1
-  - ZED SDK 2.4.1
+  - CUDA 11.0
+  - ZED SDK 3.2.2
 
 ## Reference Implementation
 - I heavily referred Stereolab's [ZED SDK Unity plugin](https://github.com/stereolabs/zed-unity) and [Unreal plugin](https://github.com/stereolabs/zed-unreal-plugin) implementation.
+- dlls are imported from [ZED Unreal plugin](https://github.com/stereolabs/zed-unreal-plugin/tree/UE4.21_ZedSdk3.1).
 
 ## Note
 - Tested with ZED Mini + HTC Vive only. Oculus rift is not tested. 

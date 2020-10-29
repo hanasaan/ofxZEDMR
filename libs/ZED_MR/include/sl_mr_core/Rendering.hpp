@@ -5,8 +5,6 @@
 
 #include "sl_mr_core/defines.hpp"
 
-#include <sl/types.hpp>
-#include <sl/core.hpp>
 
 namespace sl {
 	namespace mr {
@@ -58,6 +56,11 @@ namespace sl {
 		 * @param gain The camera gain
 		 */
 		SLMRCORE_API sl::mr::noiseFactors computeNoiseFactors(float gain);
+
+		/**
+		* \brief 
+		*/
+		SLMRCORE_API void computeSRemap(sl::mr::HMD_DEVICE_TYPE HMDDeviceType, sl::RESOLUTION camRes, float b, float Ipd, float f_h, float f_z, float dp, float Hy, float Hz, sl::Resolution requestedSize, int precision, sl::Mat*& outputMx, sl::Mat*& outputMy);
 
 	}
 }
