@@ -82,14 +82,12 @@ namespace ofxZED
 
 		void initTrackingAR();
 
-		void setLatencyOffset(int64_t v) { latency_offset = v; }
-		int64_t getLatencyOffset() const { return latency_offset;  }
+		void setLatencyOffset(uint64_t v) { latency_offset = v; }
+		uint64_t getLatencyOffset() const { return latency_offset;  }
 	protected:
 		void loadHmdToZEDCalibration();
 		void setupRenderPlane();
 
-		void updateHmdPose();
-		void extractLatencyPose();
 		void adjustTrackingAR();
 		void updateTracking();
 		void lateUpdateHmdRendering();
@@ -110,19 +108,21 @@ namespace ofxZED
 
 		sl::Transform latency_pose;
 		bool b_latency_pose_ready = false;
+		bool b_positional_tracking_initialized = false;
 
 		sl::mr::trackingData tracking_data;
 		sl::Transform zed_transform;
 
 		sl::Transform zed_rig_root;
 		sl::Transform calib_transform;
+		sl::Transform tracking_origin_from_hmd;
 
 		MRCamFbo cam_left;
 		MRCamFbo cam_right;
 
 		std::function< void(VREye) > _callable_render_function;
 
-		uint64_t latency_offset = 23333333;
+		uint64_t latency_offset = 44000000;
 	};
 }
 

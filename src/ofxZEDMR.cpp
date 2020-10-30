@@ -136,7 +136,6 @@ namespace ofxZED
 
 	void MR::update()
 	{
-		updateHmdPose();
 		camera->update();
 		updateTracking();
 		lateUpdateHmdRendering();
@@ -245,37 +244,20 @@ namespace ofxZED
 	
 	void MR::initTrackingAR()
 	{
+
+
 		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
 
 		sl::Transform const_transform;
 
 		// which is correct... ??
-		sl::mr::driftCorrectorSetConstOffsetTransfrom(const_transform); // from Unity Implementation
-		//sl::mr::driftCorrectorSetConstOffsetTransfrom(hmd_transform * calib_transform); // from Unreal Implementation
+		//sl::mr::driftCorrectorSetConstOffsetTransfrom(const_transform); // from Unity Implementation
+		sl::mr::driftCorrectorSetConstOffsetTransfrom(hmd_transform * calib_transform); // from Unreal Implementation
 
-		camera->getZedCamera()->resetPositionalTracking(hmd_transform * calib_transform);
+		camera->getZedCamera()->resetPositionalTracking(hmd_transform);
 
 		zed_rig_root = hmd_transform;
-	}
-	
-	void MR::updateHmdPose()
-	{
-		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
-		sl::Timestamp ts = camera->getZedCamera()->getTimestamp(sl::TIME_REFERENCE::CURRENT);
-		sl::mr::latencyCorrectorAddKeyPose(sl::mr::keyPose(hmd_transform, ts));
-	}
-	
-	void MR::extractLatencyPose()
-	{
-		// latency transform
-		sl::Transform latency_transform;
-		if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp + sl::Timestamp(latency_offset), latency_transform)) {
-			this->latency_pose = latency_transform;
-			b_latency_pose_ready = true;
-		}
-		else {
-			b_latency_pose_ready = false;
-		}
+		tracking_origin_from_hmd = hmd_transform * calib_transform;
 	}
 	
 	void MR::adjustTrackingAR()
@@ -283,31 +265,77 @@ namespace ofxZED
 		tracking_data.trackingState = camera->trackingState;
 		tracking_data.zedPathTransform = sl::Transform(camera->pose.getRotation(), camera->pose.getTranslation());
 
-		if (camera->bZedReady && b_latency_pose_ready) {
-			camera->getZedCamera()->setIMUPrior(latency_pose);
-		}
-
+		auto tmp_tracking_data = tracking_data;
 		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
-		sl::mr::driftCorrectorGetTrackingData(tracking_data, hmd_transform, latency_pose, true, true);
+		auto inv_tracking_origin_from_hmd = tracking_origin_from_hmd;
+		inv_tracking_origin_from_hmd.inverse();
+		tmp_tracking_data.zedPathTransform = inv_tracking_origin_from_hmd * tmp_tracking_data.zedPathTransform;
+
+		//if (camera->bZedReady && b_latency_pose_ready) {
+		//	camera->getZedCamera()->setIMUPrior(latency_pose);
+		//}
+
+		sl::mr::driftCorrectorGetTrackingData(tmp_tracking_data, hmd_transform, latency_pose, true, true);
+		tracking_data.zedWorldTransform = tmp_tracking_data.zedWorldTransform;
+		tracking_data.offsetZedWorldTransform = tmp_tracking_data.offsetZedWorldTransform;
+		
 		zed_transform = tracking_data.zedWorldTransform;
 	}
 	
 	void MR::updateTracking()
 	{
+		//
+		// These code blocks heavily referenced ZedCamera.cpp L318 - L444
+		// https://github.com/stereolabs/zed-unreal-plugin/blob/UE4.21_ZedSdk3.1/Stereolabs/Source/ZED/Private/Core/ZEDCamera.cpp
+		//
+
+		// HMD tracking transform
+		sl::Transform hmd_transform = ofxZED::toZed(openvr->getmat4HMDPose());
+
+		// Current timestamp
+		sl::Timestamp current_timestamp = camera->getZedCamera()->getTimestamp(sl::TIME_REFERENCE::CURRENT);
+
+		// Set IMU prior
 		if (camera->bUseTracking) {
-			extractLatencyPose();
+			sl::Transform PastTransform;
+			bool bTransformRetrieved = sl::mr::latencyCorrectorGetTransform(current_timestamp - sl::Timestamp(latency_offset), PastTransform, false);
+			if (camera->bZedReady && bTransformRetrieved)
+			{
+				camera->getZedCamera()->setIMUPrior(PastTransform);
+			}
+		}
+
+		// Latency corrector if new image
+		if (camera->bUseTracking || camera->isFrameNew()) {
+			sl::mr::latencyCorrectorAddKeyPose(sl::mr::keyPose(hmd_transform, current_timestamp));
+
+			// latency transform
+			sl::Transform latency_transform;
+			if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp, latency_transform)) {
+				this->latency_pose = latency_transform;
+				b_latency_pose_ready = true;
+			}
+			else {
+				b_latency_pose_ready = false;
+			}
+		}
+
+		if (camera->bUseTracking) {
+			if (!b_positional_tracking_initialized) {
+				initTrackingAR();
+				b_positional_tracking_initialized = true;
+			}
 			adjustTrackingAR();
 			zed_rig_root = zed_transform * calib_transform;
 		}
 		else {
-			extractLatencyPose();
 			zed_rig_root = latency_pose * calib_transform;
 		}
 	}
 
 	void MR::lateUpdateHmdRendering()
 	{
-		updateHmdPose();
+		//updateHmdPose();
 
 		//
 		// update render plane
