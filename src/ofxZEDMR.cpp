@@ -164,14 +164,16 @@ namespace ofxZED
 
 		auto mode = ofGetRectMode();
 		ofSetRectMode(OF_RECTMODE_CENTER);
+		auto ori = ofGetOrientation();
 		bgra_shader.begin();
+		float yf = ori == OF_ORIENTATION_DEFAULT ? 1.0 : -1.0;
 		if (eye == VREye::Eye_Left) {
 			ofMultMatrix(quad_left);
-			camera->getColorLeftTexture().draw(0, 0, render_plane_size.x, -render_plane_size.y);
+			camera->getColorLeftTexture().draw(0, 0, render_plane_size.x, yf * render_plane_size.y);
 		}
 		else {
 			ofMultMatrix(quad_right);
-			camera->getColorRightTexture().draw(0, 0, render_plane_size.x, -render_plane_size.y);
+			camera->getColorRightTexture().draw(0, 0, render_plane_size.x, yf * render_plane_size.y);
 		}
 		bgra_shader.end();
 		ofSetRectMode(mode);
