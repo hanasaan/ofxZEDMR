@@ -122,7 +122,7 @@ namespace ofxZED
 
 		std::function< void(VREye) > _callable_render_function;
 
-		uint64_t latency_offset = 44000000;
+		uint64_t latency_offset = 34000000;
 	};
 }
 

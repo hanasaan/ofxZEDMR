@@ -39,4 +39,6 @@ class ofApp : public ofBaseApp{
 
 		ofMatrix4x4 lcp;
 		ofMatrix4x4 rcp;
+
+		bool b_draw_individual = false;
 };

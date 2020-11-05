@@ -10,7 +10,7 @@ void ofApp::setup(){
 
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
-	zed.init(true, false, false, 0);
+	zed.init(true, false, false, 0, sl::DEPTH_MODE::PERFORMANCE);
 	mr.setup(&zed, &openVR, ofxZED::HmdType_Vive, std::bind(&ofApp::renderMR, this, std::placeholders::_1));
 }
 
@@ -37,7 +37,7 @@ void ofApp::update(){
 
 
 	mr.update(); // handles zed update inside mr...
-	if (!ofGetKeyPressed(' ')) {
+	if (!b_draw_individual) {
 		mr.renderScene();
 	}
 }
@@ -61,7 +61,7 @@ void  ofApp::render(vr::Hmd_Eye nEye) {
 
 
 
-	if (!ofGetKeyPressed(' ')) {
+	if (!b_draw_individual) {
 		mr.drawRenderedSceneTexture((ofxZED::VREye&)nEye);
 	}
 	else {
@@ -110,6 +110,8 @@ void ofApp::draw(){
 	openVR.drawDebugInfo(10.0f, 500.0f);
 
 	ofDrawBitmapStringHighlight(ofToString(mr.getLatencyOffset()), 10, 20);
+
+	ofDrawBitmapStringHighlight("ZED pos : " + ofToString(zed.getTrackedPose().getTranslation()), 10, 40);
 }
 
 //--------------------------------------------------------------
@@ -122,6 +124,9 @@ void ofApp::keyPressed(int key){
 	}
 	if (key == OF_KEY_DOWN) {
 		mr.setLatencyOffset(mr.getLatencyOffset() - 1000 * 1000 * 5);
+	}
+	if (key == 'I') {
+		b_draw_individual = !b_draw_individual;
 	}
 }
 

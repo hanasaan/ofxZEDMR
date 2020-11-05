@@ -311,7 +311,7 @@ namespace ofxZED
 
 			// latency transform
 			sl::Transform latency_transform;
-			if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp, latency_transform)) {
+			if (sl::mr::latencyCorrectorGetTransform(camera->cameraTimestamp - sl::Timestamp(latency_offset), latency_transform)) {
 				this->latency_pose = latency_transform;
 				b_latency_pose_ready = true;
 			}
