@@ -6,6 +6,8 @@
 #include "ofxZEDMR.h"
 
 class ofApp : public ofBaseApp{
+	ofImage _texture;
+	ofBoxPrimitive _box;
 
 	public:
 		void setup();

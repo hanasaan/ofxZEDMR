@@ -10,8 +10,20 @@ void ofApp::setup(){
 
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
-	zed.init(true, false, false, 0, sl::DEPTH_MODE::PERFORMANCE);
+	zed.init(true, true, false, 0, sl::DEPTH_MODE::PERFORMANCE);
 	mr.setup(&zed, &openVR, ofxZED::HmdType_Vive, std::bind(&ofApp::renderMR, this, std::placeholders::_1));
+
+	// setup scene
+	//
+	_texture.load("of.png");
+	_texture.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+
+	_box.set(5.0);
+	_box.enableColors();
+	_box.mapTexCoordsFromTexture(_texture.getTexture());
+
+	// Create a translation matrix to place the box in the space
+	//_translateMatrix.translate(ofVec3f(0.0, 0.0, -2.0));
 }
 
 //--------------------------------------------------------------
@@ -45,6 +57,8 @@ void ofApp::update(){
 void ofApp::renderMR(ofxZED::VREye eye)
 {
 	mr.drawCameraTexture2D(eye);
+	auto& cam = eye == ofxZED::Eye_Left ? mr.getCamLeft().cam : mr.getCamRight().cam;
+	mr.drawDepth2D(eye, cam.getNearClip(), cam.getFarClip());
 	drawScene();
 }
 
@@ -65,8 +79,8 @@ void  ofApp::render(vr::Hmd_Eye nEye) {
 		mr.drawRenderedSceneTexture((ofxZED::VREye&)nEye);
 	}
 	else {
+		mr.drawCameraTexture((ofxZED::VREye&)nEye, true);
 		drawScene();
-		mr.drawCameraTexture((ofxZED::VREye&)nEye);
 	}
 
 
@@ -75,6 +89,7 @@ void  ofApp::render(vr::Hmd_Eye nEye) {
 
 void ofApp::drawScene()
 {
+	ofEnableDepthTest();
 	ofPushStyle();
 	ofSetColor(ofColor::green);
 	ofPushMatrix();
@@ -100,6 +115,29 @@ void ofApp::drawScene()
 	ofDrawAxis(0.2);
 	ofPopMatrix();
 	ofPopStyle();
+
+	ofPushMatrix();
+
+	ofScale(0.01, 0.01, 0.01);
+	_texture.bind();
+	for (float x = -50; x < 50; x += 10) {
+		ofPushMatrix();
+		ofTranslate(x, 100.0, 0);
+		_box.draw();
+		ofPopMatrix();
+	}
+	for (float x = -50; x < 50; x += 10) {
+		ofPushMatrix();
+		ofTranslate(0, 100.0 + x, 0);
+		_box.draw();
+		ofPopMatrix();
+	}
+	_texture.unbind();
+	//_shader.end();
+
+	ofDrawAxis(100);
+	ofDisableDepthTest();
+	ofPopMatrix();
 }
 
 
@@ -125,8 +163,11 @@ void ofApp::keyPressed(int key){
 	if (key == OF_KEY_DOWN) {
 		mr.setLatencyOffset(mr.getLatencyOffset() - 1000 * 1000 * 5);
 	}
-	if (key == 'I') {
+	if (key == 'd') {
 		b_draw_individual = !b_draw_individual;
+	}
+	if (key == 'f') {
+		ofToggleFullscreen();
 	}
 }
 

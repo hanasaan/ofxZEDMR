@@ -42,7 +42,7 @@ namespace ofxZED
 		CustomProjectionMatrixCamera cam;
 		ofFbo fbo;
 
-		void setup(Camera * camera, VREye eye, int internal_format = GL_RGB, int num_samples = 0);
+		void setup(Camera * camera, VREye eye, int internal_format = GL_RGB, int num_samples = 0, float fbo_scale = 2.0);
 		void begin()
 		{
 			fbo.begin();
@@ -69,9 +69,10 @@ namespace ofxZED
 
 		void renderScene();
 
-		void drawCameraTexture(VREye eye);
+		void drawCameraTexture(VREye eye, bool force_vflip = false);
 
 		void drawCameraTexture2D(VREye eye);
+		void drawDepth2D(VREye eye, float cnear, float cfar);
 		void drawRenderedSceneTexture(VREye eye);
 
 		// for camera texture rendering
@@ -99,6 +100,7 @@ namespace ofxZED
 		ofVec3f plane_offset = ofVec3f(0, 0, -PLANE_DISTANCE);
 
 		ofShader bgra_shader;
+		ofShader depth_shader;
 
 		ofMatrix4x4 quad_left;
 		ofMatrix4x4 quad_right;

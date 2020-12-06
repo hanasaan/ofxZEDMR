@@ -51,9 +51,9 @@ namespace ofxZED
 		ofPopView();
 	}
 
-	void MRCamFbo::setup(Camera * camera, VREye eye, int internal_format, int num_samples)
+	void MRCamFbo::setup(Camera * camera, VREye eye, int internal_format, int num_samples, float fbo_scale)
 	{
-		fbo.allocate(camera->zedWidth, camera->zedHeight, internal_format, num_samples);
+		fbo.allocate(fbo_scale * camera->zedWidth, fbo_scale * camera->zedHeight, internal_format, num_samples);
 		fbo.begin();
 		ofClear(200);
 		fbo.end();
@@ -67,7 +67,7 @@ namespace ofxZED
 		cerr << "fy:" << c.fy << endl;
 		cam.setNearClip(0.001);
 		cam.setFarClip(100.0);
-		cam.setup(camera->zedWidth, camera->zedHeight, c.fx, c.fy, c.cx, c.cy);
+		cam.setup(fbo_scale * camera->zedWidth, fbo_scale * camera->zedHeight, fbo_scale * c.fx, fbo_scale * c.fy, fbo_scale * c.cx, fbo_scale * c.cy);
 	}
 
 
@@ -90,7 +90,7 @@ namespace ofxZED
 		string vert150 = "#version 150\n";
 		vert150 += STRINGIFY
 		(
-			in vec4 position;
+		in vec4 position;
 		in vec2 texcoord;
 
 		out vec2 texCoordVarying;
@@ -104,10 +104,34 @@ namespace ofxZED
 		}
 		);
 
+		// refernece
+		// https://stackoverflow.com/questions/7777913/how-to-render-depth-linearly-in-modern-opengl-with-gl-fragcoord-z-in-fragment-sh/45710371
+		string depth_frag150 = "#version 150\n";
+		depth_frag150 += STRINGIFY
+		(
+		in vec2 texCoordVarying;
+		out vec4 fragColor;
+		uniform sampler2D tex;
+		uniform float cnear;
+		uniform float cfar;
+
+		void main(void) {
+			vec2 texcoord0 = texCoordVarying.xy;
+			vec4 tmp = texture(tex, texcoord0);
+			float n = cnear;
+			float f = cfar;
+			float z_eye = tmp.r;
+			float z_ndc = (z_eye * (f + n) / (f - n) - 2.0 * f*n / (f - n)) / z_eye;
+			float depth = (z_ndc + 1.0) / 2.0;
+			gl_FragDepth = depth;
+			fragColor = vec4(depth, depth, depth, 0.0);
+		}
+		);
+
 		string frag150 = "#version 150\n";
 		frag150 += STRINGIFY
 		(
-			in vec2 texCoordVarying;
+		in vec2 texCoordVarying;
 		out vec4 fragColor;
 		uniform sampler2D tex;
 
@@ -122,6 +146,11 @@ namespace ofxZED
 		bgra_shader.setupShaderFromSource(GL_FRAGMENT_SHADER, frag150);
 		bgra_shader.bindDefaults();
 		bgra_shader.linkProgram();
+
+		depth_shader.setupShaderFromSource(GL_VERTEX_SHADER, vert150);
+		depth_shader.setupShaderFromSource(GL_FRAGMENT_SHADER, depth_frag150);
+		depth_shader.bindDefaults();
+		depth_shader.linkProgram();
 
 		// multisample fbo does not work..
 		cam_left.setup(this->camera, Eye_Left, GL_RGB, 0);
@@ -158,7 +187,7 @@ namespace ofxZED
 		cam_right.end();
 	}
 
-	void MR::drawCameraTexture(VREye eye)
+	void MR::drawCameraTexture(VREye eye, bool force_vflip)
 	{
 		ofPushMatrix();
 
@@ -166,7 +195,7 @@ namespace ofxZED
 		ofSetRectMode(OF_RECTMODE_CENTER);
 		auto ori = ofGetOrientation();
 		bgra_shader.begin();
-		float yf = ori == OF_ORIENTATION_DEFAULT ? 1.0 : -1.0;
+		float yf = (ori == OF_ORIENTATION_DEFAULT && !force_vflip) ? 1.0 : -1.0;
 		if (eye == VREye::Eye_Left) {
 			ofMultMatrix(quad_left);
 			camera->getColorLeftTexture().draw(0, 0, render_plane_size.x, yf * render_plane_size.y);
@@ -185,16 +214,47 @@ namespace ofxZED
 	{
 		ofPushView();
 		ofSetupScreen();
+		auto w = ofGetViewportWidth();
+		auto h = ofGetViewportHeight();
 		bgra_shader.begin();
 		if (eye == VREye::Eye_Left) {
-			camera->getColorLeftTexture().draw(0, 0);
+			camera->getColorLeftTexture().draw(0, 0, w, h);
 		}
 		else {
-			camera->getColorRightTexture().draw(0, 0);
+			camera->getColorRightTexture().draw(0, 0, w, h);
 		}
 		bgra_shader.end();
 		ofPopView();
 
+	}
+
+	void ofxZED::MR::drawDepth2D(VREye eye, float cnear, float cfar)
+	{
+		ofPushStyle();
+		ofEnableAlphaBlending();
+		ofEnableDepthTest();
+		ofPushView();
+		ofSetupScreen();
+		auto w = ofGetViewportWidth();
+		auto h = ofGetViewportHeight();
+		depth_shader.begin();
+		depth_shader.setUniform1f("cnear", cnear);
+		depth_shader.setUniform1f("cfar", cfar);
+		if (eye == VREye::Eye_Left) {
+			if (camera->getDepthLeftTexture().isAllocated()) {
+				camera->getDepthLeftTexture().draw(0, 0, w, h);
+			}
+		}
+		else {
+			if (camera->getDepthRightTexture().isAllocated()) {
+				camera->getDepthRightTexture().draw(0, 0, w, h);
+			}
+		}
+		depth_shader.end();
+		ofPopView();
+		ofDisableDepthTest();
+		ofDisableAlphaBlending();
+		ofPopStyle();
 	}
 
 	void MR::drawRenderedSceneTexture(VREye eye)
