@@ -228,8 +228,9 @@ namespace ofxZED
 
 	}
 
-	void ofxZED::MR::drawDepth2D(VREye eye, float cnear, float cfar)
+	void ofxZED::MR::drawDepth2D(VREye eye)
 	{
+		auto projectionMatrix = ofGetCurrentMatrix(OF_MATRIX_PROJECTION);
 		ofPushStyle();
 		ofEnableAlphaBlending();
 		ofEnableDepthTest();
@@ -237,9 +238,14 @@ namespace ofxZED
 		ofSetupScreen();
 		auto w = ofGetViewportWidth();
 		auto h = ofGetViewportHeight();
+		float m22 = -projectionMatrix[2][2];
+		float m32 = -projectionMatrix[3][2];
+		float far2 = (2.0f*m32) / (2.0f*m22 - 2.0f);
+		float near2 = ((m22 - 1.0f)*far2) / (m22 + 1.0);
+
 		depth_shader.begin();
-		depth_shader.setUniform1f("cnear", cnear);
-		depth_shader.setUniform1f("cfar", cfar);
+		depth_shader.setUniform1f("cnear", near2);
+		depth_shader.setUniform1f("cfar", far2);
 		if (eye == VREye::Eye_Left) {
 			if (camera->getDepthLeftTexture().isAllocated()) {
 				camera->getDepthLeftTexture().draw(0, 0, w, h);

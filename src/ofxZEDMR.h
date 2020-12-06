@@ -72,7 +72,7 @@ namespace ofxZED
 		void drawCameraTexture(VREye eye, bool force_vflip = false);
 
 		void drawCameraTexture2D(VREye eye);
-		void drawDepth2D(VREye eye, float cnear, float cfar);
+		void drawDepth2D(VREye eye);
 		void drawRenderedSceneTexture(VREye eye);
 
 		// for camera texture rendering

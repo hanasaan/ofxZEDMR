@@ -57,8 +57,7 @@ void ofApp::update(){
 void ofApp::renderMR(ofxZED::VREye eye)
 {
 	mr.drawCameraTexture2D(eye);
-	auto& cam = eye == ofxZED::Eye_Left ? mr.getCamLeft().cam : mr.getCamRight().cam;
-	mr.drawDepth2D(eye, cam.getNearClip(), cam.getFarClip());
+	mr.drawDepth2D(eye);
 	drawScene();
 }
 
@@ -120,17 +119,19 @@ void ofApp::drawScene()
 
 	ofScale(0.01, 0.01, 0.01);
 	_texture.bind();
-	for (float x = -50; x < 50; x += 10) {
-		ofPushMatrix();
-		ofTranslate(x, 100.0, 0);
-		_box.draw();
-		ofPopMatrix();
-	}
-	for (float x = -50; x < 50; x += 10) {
-		ofPushMatrix();
-		ofTranslate(0, 100.0 + x, 0);
-		_box.draw();
-		ofPopMatrix();
+	for (float z = -300.0; z < 300.0; z += 50.0) {
+		for (float x = -50; x < 50; x += 10) {
+			ofPushMatrix();
+			ofTranslate(x, 100.0, z);
+			_box.draw();
+			ofPopMatrix();
+		}
+		for (float x = -50; x < 50; x += 10) {
+			ofPushMatrix();
+			ofTranslate(0, 100.0 + x, z);
+			_box.draw();
+			ofPopMatrix();
+		}
 	}
 	_texture.unbind();
 	//_shader.end();
