@@ -10,7 +10,7 @@ void ofApp::setup(){
 
 	// We need to pass the method we want ofxOpenVR to call when rending the scene
 	openVR.setup(std::bind(&ofApp::render, this, std::placeholders::_1));
-	zed.init(true, true, false, 0, sl::DEPTH_MODE::PERFORMANCE);
+	zed.init(true, true, false, false, 0, sl::DEPTH_MODE::PERFORMANCE);
 	mr.setup(&zed, &openVR, ofxZED::HmdType_Vive, std::bind(&ofApp::renderMR, this, std::placeholders::_1));
 
 	// setup scene
