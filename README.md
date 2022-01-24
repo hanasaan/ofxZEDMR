@@ -4,7 +4,7 @@ OF Addon for building mixed-reality experience using Stereolab's [ZED Mini](http
 ## Dependencies
 - Please use my([@hanasaan](https://github.com/hanasaan/)) fork.
 - [ofxOpenVR](https://github.com/hanasaan/ofxOpenVR)
-- [ofxZED](https://github.com/hanasaan/ofxZED)
+- [ofxZED for v3.2.2](https://github.com/hanasaan/ofxZED/releases/tag/v3.2.2)
 
 ## Requirement
   - openFrameworks 0.11.0 64bit
